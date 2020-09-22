@@ -189,6 +189,7 @@ class PtpIpInitCmdReq(PtpIpPacket):
     def __init__(self, data=None):
         super(PtpIpInitCmdReq, self).__init__()
         self.cmdtype = struct.pack('I', 0x01)
+        self.version = struct.pack('>I', 0x0100)
         if data is None:
             guid = uuid.uuid4()
             self.guid = guid.bytes
@@ -199,7 +200,7 @@ class PtpIpInitCmdReq(PtpIpPacket):
             self.hostname = data[16:0]
 
     def data(self):
-        return self.cmdtype + self.guid + self.hostname
+        return self.cmdtype + self.guid + self.hostname + self.version
 
 
 class PtpIpInitCmdAck(PtpIpPacket):
