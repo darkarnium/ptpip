@@ -1,4 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -
+# Alias into ptpip to avoid "from ptpip.ptpip ..."
+from ptpip.ptpip import *
 
 __version__ = '0.1.1'
