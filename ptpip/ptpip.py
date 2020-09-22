@@ -61,7 +61,7 @@ class PtpIpConnection(object):
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             s.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
             s.connect((host, port))
-        except socket.error, (value, message):
+        except socket.error as message:
             if s:
                 s.close()
             print(f"Could not open socket: {message}")
