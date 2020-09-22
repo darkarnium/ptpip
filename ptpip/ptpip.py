@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -
 import uuid
 import time
 import socket
@@ -47,9 +45,9 @@ class PtpIpConnection(object):
                 ptpip_packet_reply = self.send_recieve_ptpip_packet(ptip_cmd, self.session)
                 if (ptpip_packet_reply.ptp_response_code == 0x2001 and \
                         ptpip_packet_reply.ptp_response_code == 0x2019):
-                    print "Cmd send successfully"
+                    print("Cmd send successfully")
                 else:
-                    print "cmd reply is: " + str(ptpip_packet_reply.ptp_response_code)
+                    print(f"cmd reply is: {ptpip_packet_reply.ptp_response_code}")
 
             # wait 1 second before new packets are processed/send to the camera
             time.sleep(1)
@@ -66,7 +64,7 @@ class PtpIpConnection(object):
         except socket.error, (value, message):
             if s:
                 s.close()
-            print "Could not open socket: " + message
+            print(f"Could not open socket: {message}")
         return s
 
     def send_recieve_ptpip_packet(self, ptpip_packet, session):
@@ -156,7 +154,7 @@ class PtpIpPacket(object):
         if data is None:
             self.cmdtype = None
         else:
-            print "Cmd Type: " + str(struct.unpack('I', data[0:4])[0])
+            print(f"Cmd Type: {struct.unpack('I', data[0:4])[0]}")
             self.cmdtype = struct.unpack('I', data[0:4])[0]
 
         if self.cmdtype == 1:
@@ -418,7 +416,7 @@ class PtpIpEndDataPacket(PtpIpPacket):
         super(PtpIpEndDataPacket, self).__init__()
         if data is not None:
             self.transaction_id = data[0:4]
-            print "transaction_id: " + str(struct.unpack('I', self.transaction_id)[0])
+            print(f"transaction_id: {struct.unpack('I', self.transaction_id)[0]}")
             self.data = data[4:]
 
 
