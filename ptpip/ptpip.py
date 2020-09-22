@@ -193,7 +193,7 @@ class PtpIpInitCmdReq(PtpIpPacket):
             guid = uuid.uuid4()
             self.guid = guid.bytes
             self.hostname = socket.gethostname() + '\x00'
-            self.hostname = self.hostname.encode('utf-16')
+            self.hostname = self.hostname.encode('utf-16-le')
         else:
             self.guid = data[0:16]
             self.hostname = data[16:0]
