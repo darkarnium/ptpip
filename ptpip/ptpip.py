@@ -225,7 +225,9 @@ class PtpIpEventReq(PtpIpPacket):
             self.session_id = session_id
 
     def data(self):
-        return self.cmdtype + self.session_id
+        if self.session_id:
+            return self.cmdtype + self.session_id
+        return self.cmdtype
 
 
 class PtpIpEventAck(PtpIpPacket):
