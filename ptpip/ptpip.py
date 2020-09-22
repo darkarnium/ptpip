@@ -139,7 +139,7 @@ class PtpIpConnection(object):
     def recieve_data(self, session):
         data = session.recv(4)
         (data_length,) = struct.unpack('I', data)
-        print "Laenge des Paketes: " + str(data_length)
+        print(f"Packet length: {data_length}")
         while (data_length) > len(data):
             data += session.recv(data_length - len(data))
         return data[4:]
